@@ -45,7 +45,7 @@ The project is configured for a standard local Python environment.
 **1. Clone the repository:**
 ```bash
 git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
-cd Valorant-Team-Manager-API```
+cd Valorant-Team-Manager-API
 
 2. Create a virtual environment & install dependencies: 
 ```bash
@@ -54,15 +54,18 @@ venv\Scripts\activate  # On Windows
 pip install -r requirements.txt
 
 3. Configure Environment Variables:
+```bash
 Create a .env file in the root directory and configure your database credentials:
 DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@localhost/esports_db
 RIOT_API_KEY=your_riot_api_key_here
 
 4. Apply Migrations & Run the Server:
+```bash
 alembic upgrade head
 uvicorn main:app --reload
 
 5. Access the Application:
+```bash
 Backend API Swagger UI: http://localhost:8000/docs
 
 Alternative ReDoc UI: http://localhost:8000/redoc
