@@ -20,8 +20,12 @@ A robust Backend API built with **FastAPI** and **PostgreSQL** to manage esports
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
-Create and activate a virtual environment.
+git clone(https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
 
-Install dependencies:pip install -r requirements.txt
-Run the application:uvicorn app.main:app --reload
+1. Create and activate a virtual environment.
+
+2. Install dependencies:
+pip install -r requirements.txt
+
+3. Run the application:
+uvicorn app.main:app --reload
