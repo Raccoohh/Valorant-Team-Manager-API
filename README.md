@@ -45,9 +45,10 @@ The project is configured for a standard local Python environment.
 **1. Clone the repository:**
 ```bash
 git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
-cd Valorant-Team-Manager-API
+cd Valorant-Team-Manager-API```
 
 2. Create a virtual environment & install dependencies: 
+```bash
 python -m venv venv
 venv\Scripts\activate  # On Windows
 pip install -r requirements.txt
