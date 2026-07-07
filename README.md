@@ -6,39 +6,37 @@
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
 ![Alembic](https://img.shields.io/badge/Alembic-Migrations-orange)
 
-An asynchronous backend API designed to manage esports teams, dynamic player rosters, tournament participation, and financial tracking for Valorant.
+An asynchronous backend API designed to manage competitive Valorant esports teams, player rosters, tournament participation, and financial tracking.
 
 ## 🚀 Features
 
-* **Player Management:** Register players, store Riot IDs, and manage individual profiles.
+* **Player Management:** Register players, store unique Riot IDs, and manage individual profiles.
 * **Dynamic Team Rosters:** Create teams, assign captains, and seamlessly link multiple players to active rosters.
-* **Tournament Tracking:** Record competitive events, set entry fees, and track match results (automated win/loss calculation).
-* **Financial Dashboard:** Process team entry payments and track financial statuses for tournaments.
-* *(Planned)* **External API Integration:** Synchronize player stats directly via the official Riot Games API.
+* **Tournament Tracking:** Record competitive events, set entry fees, and track match results with automated result handling.
+* **Financial Dashboard:** Process team entry payments and track financial compliance for tournaments.
+* **Extensible Architecture:** Built with future Riot Games API integration in mind.
 
 ## 🏗️ Architecture & Best Practices Highlights
 
-As a backend-focused project, special attention was given to modern API standards and performance:
+As a backend-focused project, special attention was given to modern API standards and system performance:
 
 * **Asynchronous I/O:** Utilized `asyncpg` with FastAPI to ensure non-blocking, high-performance database operations.
-* **Data Validation:** Implemented strict schema validation and serialization using `Pydantic` models.
+* **Data Validation:** Implemented strict request validation and object serialization using `Pydantic` models.
 * **Database Migrations:** Fully version-controlled database schema using `Alembic`, allowing safe and trackable structural changes.
-* **Modular Design:** Separated the application into distinct layers (API Routers, CRUD operations, Database Models, and Schemas) for maximum scalability.
+* **Modular Design:** Separated the application into distinct layers (API Routers, CRUD operations, Database Models, and Schemas) for maximum maintainability.
 
 ## 🛠 Tech Stack
 
 * **Backend:** Python 3.10+, FastAPI, Pydantic
 * **Database & ORM:** PostgreSQL, SQLAlchemy (Async)
 * **Migrations:** Alembic
-* **External Clients:** HTTPX (for asynchronous API calls)
+* **HTTP Client:** HTTPX (for asynchronous external API requests)
 
 ## ⚙️ Local Setup & Installation
 
-The project is configured for a standard local Python environment.
-
 ### Prerequisites
 * Python 3.10+
-* PostgreSQL server running locally
+* PostgreSQL server
 
 ### Quick Start
 
@@ -47,28 +45,26 @@ The project is configured for a standard local Python environment.
 git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
 cd Valorant-Team-Manager-API
 
-2. Create a virtual environment & install dependencies: 
-```bash
+2. Create a virtual environment & install dependencies:
+
 python -m venv venv
 venv\Scripts\activate  # On Windows
 pip install -r requirements.txt
 
 3. Configure Environment Variables:
-```bash
-Create a .env file in the root directory and configure your database credentials:
+Create a .env file in the root directory and add your database credentials:
+
 DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@localhost/esports_db
 RIOT_API_KEY=your_riot_api_key_here
 
 4. Apply Migrations & Run the Server:
-```bash
+
 alembic upgrade head
 uvicorn main:app --reload
 
 5. Access the Application:
-```bash
-Backend API Swagger UI: http://localhost:8000/docs
 
-Alternative ReDoc UI: http://localhost:8000/redoc
+Backend API Swagger UI: http://localhost:8000/docs
 
 📖 API Documentation
 The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to /docs to interact with the endpoints. Key endpoints include:
@@ -81,6 +77,6 @@ POST /teams/{team_id}/players/{player_id} - Add a player to a team roster
 
 POST /tournaments/ - Create a new tournament
 
-POST /matches/ - Record match results between teams
+POST /matches/ - Record match results
 
 POST /payments/ - Process tournament entry fees
