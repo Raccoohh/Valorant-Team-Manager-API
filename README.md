@@ -1,5 +1,14 @@
 # Valorant Team Manager API 🎮
 
+![Python](https://img.shields.io/badge/Python_3.10+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![Alembic Migrations](https://img.shields.io/badge/Alembic_Migrations-FF9900?logo=python&logoColor=white)
+![Pydantic V2](https://img.shields.io/badge/Pydantic_V2-E92063?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?logo=pytest&logoColor=white)
+
 An asynchronous RESTful API built with FastAPI to manage esports teams, players, tournaments, and match statistics. Fully dockerized for seamless deployment and testing.
 
 ## 🚀 Tech Stack
@@ -33,3 +42,48 @@ The easiest way to run the API and the PostgreSQL database is via Docker.
 ```bash
 git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
 cd Valorant-Team-Manager-API
+```
+2. **Configure Environment Variables:**
+   Create a `.env` file in the root directory and configure your database credentials:
+   ```env
+   DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/postgres
+   ```
+
+**3. Build and start the containers:**
+```Bash
+docker compose up --build -d
+```
+
+**4. Run Database Migrations:**
+Generate the tables in your PostgreSQL database using Alembic:
+```Bash
+docker compose exec web alembic upgrade head
+```
+
+**5. Access the Application:**
+
+* Backend API Swagger UI: `http://localhost:8000/docs`
+* Alternative API ReDoc: `http://localhost:8000/redoc`
+
+## 🧪 Running Tests
+
+The project includes automated tests using `pytest`. You can run the test suite directly inside the Docker container without installing dependencies locally.
+
+To execute all tests, run: 
+```Bash
+docker compose exec web python -m pytest
+```
+## 🛑 Stopping the Application
+
+To stop the running containers and free up resources, run:
+```Bash
+docker compose down
+```
+## 📖 API Documentation
+
+The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to /docs to interact with the endpoints. Key endpoints include:
+* `POST /teams/` - Register a new esports team
+* `POST /payments/` - Process tournament entry fee payment
+* `POST /matches/` - Record match results and scores
+
+*Developed by [Raccoohh](https://github.com/Raccoohh)*
