@@ -48,11 +48,12 @@ git clone https://github.com/Raccoohh/Valorant-Team-Manager-API.git
 cd Valorant-Team-Manager-API
 python -m venv venv
 venv\Scripts\activate
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 
 **2. Configure Environment Variables:** Create a `.env` file in the root directory and configure your database credentials:
 
 ```env
 DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@localhost/esports_db
 RIOT_API_KEY=your_riot_api_key_here
-
+```
