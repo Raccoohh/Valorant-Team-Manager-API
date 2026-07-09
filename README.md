@@ -1,81 +1,79 @@
-<p align="center">
-  <img src="docs/banner.png" width="900">
-</p>
+# Valorant Team Manager API 🎮
 
-<h1 align="center">🎮 Valorant Team Manager API</h1>
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![Alembic](https://img.shields.io/badge/Alembic-Migrations-orange)
 
-<p align="center">
-Backend for managing Valorant esports teams and tournaments.
-</p>
+A robust asynchronous backend web application designed to track Valorant esports teams, manage dynamic player rosters, and handle tournament financials.
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker)
-![Alembic](https://img.shields.io/badge/Alembic-Migrations-red)
-![License](https://img.shields.io/badge/license-MIT-green)
+## 🚀 Features
 
-## 📑 Contents
+* **Pro Directory:** Register professional players, store unique Riot IDs, and manage individual profiles.
+* **Dynamic Team Rosters:** Create teams, assign captains, and seamlessly link multiple players to active rosters using Many-to-Many relationships.
+* **Tournament Tracking:** Record competitive events, set entry fees, and track match results with automated win/loss calculation.
+* **Financial Accounting:** Manage tournament entry payments and track financial compliance for team organizations.
 
-- Features
-- Tech Stack
-- Installation
-- API
-- Project Structure
-- Screenshots
-- License
+## 🏗️ Architecture & Best Practices Highlights
 
-## 📂 Project Structure
+As a backend-focused project, special attention was given to performance and stability:
 
-```text
-project/
-├── app/
-│   ├── api/
-│   ├── core/
-│   ├── database/
-│   ├── models/
-│   ├── routers/
-│   ├── schemas/
-│   └── main.py
-├── migrations/
-├── docker-compose.yml
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
+* **Asynchronous I/O:** Utilized strict `asyncpg` configurations with FastAPI to ensure non-blocking, high-performance database interactions.
+* **Data Validation:** Implemented strict schema validation and serialization using `Pydantic` models.
+* **Database Migrations:** Solved schema versioning using `Alembic`, allowing safe and trackable structural changes.
+* **Modular Design:** Separated the application into distinct layers (API Routers, CRUD operations, Database Models, and Schemas).
 
-## ⚙️ Environment Variables
+## 🛠 Tech Stack
 
-Create `.env`
+* **Backend:** Python 3.10+, FastAPI, SQLAlchemy (Async), Pydantic
+* **Database:** PostgreSQL
+* **Migrations:** Alembic
+* **Infrastructure:** Uvicorn, HTTPX
 
-```env
-DATABASE_URL=postgresql+asyncpg://user:password@db:5432/esports_db
-SECRET_KEY=your_secret_key
-REDIS_URL=redis://redis:6379/0
-```
+## ⚙️ Local Setup & Installation
 
-## 🚀 Example Request
+The project is fully configured for easy local setup.
 
-```http
-POST /api/auth/login
-Content-Type: application/json
+### Prerequisites
+* Python 3.10+
+* PostgreSQL server running locally
+* Git
 
-{
-  "email": "admin@example.com",
-  "password": "password123"
-}
-```
+### Quick Start
 
-## 📷 API Documentation
+**1. Clone the repository:**
+```bash
+git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
+cd Valorant-Team-Manager-API
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 
-<img src="docs/swagger.png">
+2. Configure Environment Variables: Create a .env file in the root directory and configure your database credentials:
+DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@localhost/esports_db
+RIOT_API_KEY=your_riot_api_key_here
 
-## 📄 License
+3. Build and Run the Server:
+alembic upgrade head
+uvicorn main:app --reload
 
-MIT License
+4. Access the Application:
+Backend API Swagger UI: http://localhost:8000/docs
 
-## 👤 Author
+📖 API Documentation
+The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to /docs to interact with the endpoints. Key endpoints include:
 
-**Raccoon**
+POST /players/ - Register a new esports player
 
-GitHub: https://github.com/твій-нік
+POST /teams/ - Create a new esports team
+
+POST /teams/{team_id}/players/{player_id} - Add a player to an active team roster
+
+POST /tournaments/ - Create a new tournament
+
+POST /matches/ - Record match results
+
+POST /payments/ - Process tournament entry fees
+
+Developed by Raccoohh
