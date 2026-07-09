@@ -1,9 +1,9 @@
 from pydantic import BaseModel, ConfigDict, Field
 
 class TournamentBase(BaseModel):
-    name: str = Field(..., example="VCL East Qualifier")
-    entry_fee: float = Field(..., example=50.00)
-    status: str = Field(default="upcoming", example="upcoming")
+    name: str = Field(..., json_schema_extra={"example": "VCL East Qualifier"})
+    entry_fee: float = Field(..., json_schema_extra={"example": 50.00})
+    status: str = Field(default="upcoming", json_schema_extra={"example": "upcoming"})
 
 class TournamentCreate(TournamentBase):
     pass

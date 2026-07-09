@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Налаштування бази даних PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: valorant_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Artur12345 # Заміни на свій пароль, якщо потрібно
+      POSTGRES_DB: esports_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Налаштування твого FastAPI сервера
+  web:
+    build: .
+    container_name: valorant_api
+    restart: always
+    # Docker автоматично запустить міграції, а потім сам сервер
+    command: sh -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app  # Це дозволить бачити зміни в коді без перезапуску контейнера
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

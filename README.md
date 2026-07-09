@@ -1,81 +1,48 @@
-<p align="center">
-  <img src="docs/banner.png" width="900">
-</p>
+# Valorant Team Manager API 🎮
 
-<h1 align="center">🎮 Valorant Team Manager API</h1>
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![Alembic](https://img.shields.io/badge/Alembic-Migrations-orange)
 
-<p align="center">
-Backend for managing Valorant esports teams and tournaments.
-</p>
+A high-performance asynchronous web application designed to manage competitive Valorant esports teams, synchronize player rosters, and track financial/tournament performance.
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker)
-![Alembic](https://img.shields.io/badge/Alembic-Migrations-red)
-![License](https://img.shields.io/badge/license-MIT-green)
+## 🚀 Features
 
-## 📑 Contents
+* **Player Management:** Register professional players, store unique Riot IDs, and manage individual profiles.
+* **Dynamic Team Rosters:** Create teams, assign captains, and manage multi-player rosters with efficient relationship handling.
+* **Tournament Tracking:** Record competitive events, track entry fees, and calculate match results (automated win/loss evaluation).
+* **Financial Accounting:** Manage tournament entry payments and track financial compliance for team organizations.
+* **Extensible Architecture:** Designed with future Riot Games API integration in mind.
 
-- Features
-- Tech Stack
-- Installation
-- API
-- Project Structure
-- Screenshots
-- License
+## 🏗️ Architecture & Best Practices Highlights
 
-## 📂 Project Structure
+As a backend-focused project, special attention was given to performance, maintainability, and stability:
 
-```text
-project/
-├── app/
-│   ├── api/
-│   ├── core/
-│   ├── database/
-│   ├── models/
-│   ├── routers/
-│   ├── schemas/
-│   └── main.py
-├── migrations/
-├── docker-compose.yml
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
+* **Asynchronous I/O:** Utilized `asyncpg` with FastAPI to ensure non-blocking, high-performance database interactions.
+* **Data Validation:** Implemented strict request validation and object serialization using `Pydantic` models.
+* **Database Migrations:** Fully version-controlled database schema using `Alembic`, allowing safe and trackable structural changes.
+* **Modular Design:** Separated the application into distinct layers (API Routers, CRUD operations, Database Models, and Schemas) for maximum scalability.
 
-## ⚙️ Environment Variables
+## 🛠 Tech Stack
 
-Create `.env`
+* **Backend:** Python 3.10+, FastAPI, Pydantic
+* **Database & ORM:** PostgreSQL, SQLAlchemy (Async)
+* **Migrations:** Alembic
+* **HTTP Client:** HTTPX (for asynchronous API requests)
 
-```env
-DATABASE_URL=postgresql+asyncpg://user:password@db:5432/esports_db
-SECRET_KEY=your_secret_key
-REDIS_URL=redis://redis:6379/0
-```
+## ⚙️ Local Setup & Installation
 
-## 🚀 Example Request
+### Prerequisites
+* Python 3.10+
+* PostgreSQL server
 
-```http
-POST /api/auth/login
-Content-Type: application/json
+### Quick Start
 
-{
-  "email": "admin@example.com",
-  "password": "password123"
-}
-```
+**1. Clone the repository:**
+```bash
+git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
+cd Valorant-Team-Manager-API
 
-## 📷 API Documentation
-
-<img src="docs/swagger.png">
-
-## 📄 License
-
-MIT License
-
-## 👤 Author
-
-**Raccoon**
-
-GitHub: https://github.com/твій-нік
+2. Create a virtual environment & install dependencies:

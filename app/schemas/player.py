@@ -2,10 +2,10 @@ from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
 
 class PlayerBase(BaseModel):
-    nickname: str = Field(..., example="m1zz1x")
-    riot_id: str = Field(..., example="9Raccoon9#TAG")
-    game_role: str = Field(..., example="Duelist")
-    discord_tag: Optional[str] = None
+    nickname: str = Field(..., json_schema_extra={"example": "m1zz1x"})
+    riot_id: str = Field(..., json_schema_extra={"example": "M1zz1x#TAG"})
+    game_role: str = Field(..., json_schema_extra={"example": "Duelist"})
+    discord_tag: Optional[str] = Field(default=None, json_schema_extra={"example": None})
 
 class PlayerCreate(PlayerBase):
     pass

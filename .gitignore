@@ -1,17 +1,15 @@
-# Секретні дані (найважливіше!)
-.env
-
-# Віртуальне середовище (це величезна папка, її не треба завантажувати)
-venv/
-
-# Тимчасові файли Python (їх генерує система)
+# Python
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+venv/
+.env
+.pytest_cache/
+.dockerignore
 
-# Файли бази даних (якщо ти використовуєш SQLite, наприклад)
-*.db
-*.sqlite3
+# Docker
+docker-compose.override.yml
 
-# Системні файли (для macOS)
-.DS_Store
+# IDE
+.idea/
+.vscode/
