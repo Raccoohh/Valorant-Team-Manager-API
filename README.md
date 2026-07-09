@@ -51,3 +51,17 @@ To execute all tests, run:
 ```Bash
 docker compose exec web python -m pytest
 ```
+## 🛑 Stopping the Application
+
+To stop the running containers and free up resources, run:
+```Bash
+docker compose down
+```
+## 📖 API Documentation
+
+The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to /docs to interact with the endpoints. Key endpoints include:
+* `POST /teams/` - Register a new esports team
+* `POST /payments/` - Process tournament entry fee payment
+* `POST /matches/` - Record match results and scores
+
+*Developed by [Raccoohh](https://github.com/Raccoohh)*
