@@ -57,3 +57,10 @@ pip install -r requirements.txt
 DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@localhost/esports_db
 RIOT_API_KEY=your_riot_api_key_here
 ```
+**3. Build and Run the Server:** 
+```Bash
+alembic upgrade head
+uvicorn main:app --reload
+```
+**4. Access the Application:** 
+Backend API Swagger UI: http://localhost:8000/docs
