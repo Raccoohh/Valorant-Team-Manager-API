@@ -1,5 +1,11 @@
 # Valorant Team Manager API 🎮
 
+![Python](https://img.shields.io/badge/Python_3.10+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![Alembic Migrations](https://img.shields.io/badge/Alembic_Migrations-FF9900?logo=python&logoColor=white)
+
 An asynchronous RESTful API built with FastAPI to manage esports teams, players, tournaments, and match statistics. Fully dockerized for seamless deployment and testing.
 
 ## 🚀 Tech Stack
