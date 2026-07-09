@@ -64,3 +64,20 @@ uvicorn main:app --reload
 ```
 **4. Access the Application:** 
 Backend API Swagger UI: http://localhost:8000/docs
+
+📖 API Documentation
+The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to /docs to interact with the endpoints. Key endpoints include:
+
+POST /players/ - Register a new esports player
+
+POST /teams/ - Create a new esports team
+
+POST /teams/{team_id}/players/{player_id} - Add a player to an active team roster
+
+POST /tournaments/ - Create a new tournament
+
+POST /matches/ - Record match results
+
+POST /payments/ - Process tournament entry fees
+
+Developed by Raccoohh
