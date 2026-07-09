@@ -34,11 +34,17 @@ The easiest way to run the API and the PostgreSQL database is via Docker.
 git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
 cd Valorant-Team-Manager-API
 ```
-**2. Build and start the containers:**
+2. **Configure Environment Variables:**
+   Create a `.env` file in the root directory and configure your database credentials:
+   ```env
+   DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/postgres
+   ```
+
+**3. Build and start the containers:**
 ```Bash
 docker compose up --build -d
 ```
-**3. Access the Application:**
+**4. Access the Application:**
 
 * Backend API Swagger UI: `http://localhost:8000/docs`
 * Alternative API ReDoc: `http://localhost:8000/redoc`
