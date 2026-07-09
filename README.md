@@ -44,36 +44,8 @@ The project is fully configured for easy local setup.
 
 **1. Clone the repository:**
 ```bash
-git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
+git clone https://github.com/Raccoohh/Valorant-Team-Manager-API.git
 cd Valorant-Team-Manager-API
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
-
-2. Configure Environment Variables: Create a .env file in the root directory and configure your database credentials:
-DATABASE_URL=postgresql+asyncpg://postgres:YOUR_PASSWORD@localhost/esports_db
-RIOT_API_KEY=your_riot_api_key_here
-
-3. Build and Run the Server:
-alembic upgrade head
-uvicorn main:app --reload
-
-4. Access the Application:
-Backend API Swagger UI: http://localhost:8000/docs
-
-📖 API Documentation
-The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to /docs to interact with the endpoints. Key endpoints include:
-
-POST /players/ - Register a new esports player
-
-POST /teams/ - Create a new esports team
-
-POST /teams/{team_id}/players/{player_id} - Add a player to an active team roster
-
-POST /tournaments/ - Create a new tournament
-
-POST /matches/ - Record match results
-
-POST /payments/ - Process tournament entry fees
-
-Developed by Raccoohh
