@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # Налаштування бази даних PostgreSQL
@@ -7,9 +7,9 @@ services:
     container_name: valorant_db
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Artur12345 # Заміни на свій пароль, якщо потрібно
-      POSTGRES_DB: esports_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -23,7 +23,7 @@ services:
     # Docker автоматично запустить міграції, а потім сам сервер
     command: sh -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
-      - .:/app  # Це дозволить бачити зміни в коді без перезапуску контейнера
+      - .:/app # Це дозволить бачити зміни в коді без перезапуску контейнера
     ports:
       - "8000:8000"
     depends_on:
