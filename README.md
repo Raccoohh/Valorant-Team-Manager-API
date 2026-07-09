@@ -5,6 +5,9 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
 ![Alembic Migrations](https://img.shields.io/badge/Alembic_Migrations-FF9900?logo=python&logoColor=white)
+![Pydantic V2](https://img.shields.io/badge/Pydantic_V2-E92063?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?logo=pytest&logoColor=white)
 
 An asynchronous RESTful API built with FastAPI to manage esports teams, players, tournaments, and match statistics. Fully dockerized for seamless deployment and testing.
 
