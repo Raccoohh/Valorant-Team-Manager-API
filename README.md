@@ -42,3 +42,11 @@ docker compose up --build -d
 
 * Backend API Swagger UI: `http://localhost:8000/docs`
 * Alternative API ReDoc: `http://localhost:8000/redoc`
+
+🧪 Running Tests
+The project includes automated tests using `pytest`. You can run the test suite directly inside the Docker container without installing dependencies locally.
+
+To execute all tests, run: 
+```Bash
+docker compose exec web python -m pytest
+```
