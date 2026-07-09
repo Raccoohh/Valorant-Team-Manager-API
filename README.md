@@ -44,7 +44,14 @@ cd Valorant-Team-Manager-API
 ```Bash
 docker compose up --build -d
 ```
-**4. Access the Application:**
+
+**4. Run Database Migrations:**
+Generate the tables in your PostgreSQL database using Alembic:
+```Bash
+docker compose exec web alembic upgrade head
+```
+
+**5. Access the Application:**
 
 * Backend API Swagger UI: `http://localhost:8000/docs`
 * Alternative API ReDoc: `http://localhost:8000/redoc`
