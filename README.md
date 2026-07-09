@@ -62,8 +62,9 @@ RIOT_API_KEY=your_riot_api_key_here
 alembic upgrade head
 uvicorn main:app --reload
 ```
-**4. Access the Application:** 
-Backend API Swagger UI: http://localhost:8000/docs
+**4. Access the Application:**
+
+* **Backend API Swagger UI:** `http://localhost:8000/docs`
 
 ## 📖 API Documentation
 
