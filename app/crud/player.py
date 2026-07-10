@@ -3,8 +3,11 @@ from sqlalchemy import select
 from app.models.models import Player
 from app.schemas.player import PlayerCreate
 
-async def create_player(db: AsyncSession, player: PlayerCreate) -> Player:
-    db_player = Player(**player.model_dump())
+# Додаємо аргумент puuid: str
+async def create_player(db: AsyncSession, player: PlayerCreate, puuid: str) -> Player:
+    # **player.model_dump() розпакує nickname, riot_id, game_role та discord_tag
+    # А puuid ми додаємо вручну поруч
+    db_player = Player(**player.model_dump(), puuid=puuid)
     db.add(db_player)
     await db.commit()
     await db.refresh(db_player)

@@ -12,5 +12,6 @@ class PlayerCreate(PlayerBase):
 
 class PlayerResponse(PlayerBase):
     id: int
+    puuid: str
 
     model_config = ConfigDict(from_attributes=True)

@@ -16,6 +16,9 @@ class Player(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     nickname: Mapped[str] = mapped_column(String, unique=True, index=True)
     riot_id: Mapped[str] = mapped_column(String, unique=True, index=True)
+    
+    puuid: Mapped[str] = mapped_column(String, unique=True, index=True)
+    
     game_role: Mapped[str] = mapped_column(String)
     discord_tag: Mapped[str] = mapped_column(String, nullable=True)
 
