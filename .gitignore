@@ -1,15 +1,26 @@
-# Python
+
+.env
+*.pem
+secrets/
+
+venv/
+env/
+.venv/
+
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
-.env
 .pytest_cache/
-.dockerignore
+.coverage
+htmlcov/
 
-# Docker
-docker-compose.override.yml
+*.sqlite3
+*.db
+postgres_data/
 
-# IDE
-.idea/
 .vscode/
+.idea/
+*.swp
+
+.DS_Store
+Thumbs.db

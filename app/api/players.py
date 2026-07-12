@@ -145,9 +145,10 @@ async def analyze_player_match(player_id: int, match_id: str, db: AsyncSession =
     return {
         "status": "success",
         "player": {
-            "id": db_player.id,
-            "nickname": db_player.nickname
+            "id": db_player.id,             # 👈 Змінено player на db_player
+            "nickname": db_player.nickname  # 👈 Змінено player на db_player
         },
         "match_id": match_id,
+        "stats": match_stats,
         "coach_analysis": coach_commentary
     }

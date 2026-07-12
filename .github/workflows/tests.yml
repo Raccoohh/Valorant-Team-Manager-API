@@ -1,0 +1,42 @@
+name: FastAPI CI
+
+# Пайплайн запускатиметься при кожному push та pull_request у гілку main
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: 'pip' # Автоматичне кешування залежностей для швидкості
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Встановлюємо залежності проєкту та бібліотеки для тестування
+        pip install -r requirements.txt
+        pip install pytest httpx pytest-asyncio
+
+    - name: Run pytest
+      # Змінні оточення-заглушки, щоб тести не падали через відсутність .env
+      env:
+        POSTGRES_USER: test_user
+        POSTGRES_PASSWORD: test_password
+        POSTGRES_DB: test_db
+        DATABASE_URL: sqlite+aiosqlite:///./test.db
+        RIOT_API_KEY: test_riot_key
+        HENRIK_API_KEY: test_henrik_key
+        GROQ_API_KEY: test_groq_key
+      run: |
+        pytest -v

@@ -1,26 +1,35 @@
 from fastapi import FastAPI
-from app.core.database import engine, Base
-from contextlib import asynccontextmanager
+from fastapi.middleware.cors import CORSMiddleware
 from app.api import players, teams, tournaments, matches, payments
-
-# Ця функція автоматично створює таблиці в БД при запуску
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    yield
 
 app = FastAPI(
     title="Valorant Team Management API",
-    lifespan=lifespan
+    description="RESTful API for managing esports rosters, tracking performance, and AI coaching.",
+    version="1.0.0"
 )
 
+# === НАЛАШТУВАННЯ CORS ===
+# Це обов'язковий стандарт для публічних/комерційних API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # У продакшені тут вказуються конкретні домени (наприклад, https://mydomain.com)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# === ПІДКЛЮЧЕННЯ РОУТЕРІВ ===
 app.include_router(players.router)
 app.include_router(teams.router)
 app.include_router(tournaments.router)
 app.include_router(matches.router)
 app.include_router(payments.router)
 
-@app.get("/")
+# === КОРЕНЕВИЙ ЕНДПОІНТ (Health Check) ===
+@app.get("/", tags=["Health Check"])
 async def root():
-    return {"message": "Welcome to the Esports Team Management API"}
+    return {
+        "status": "ok",
+        "message": "Welcome to the no talent | Esports Team Management API",
+        "docs_url": "/docs"
+    }
