@@ -28,6 +28,15 @@ An asynchronous RESTful API and Interactive Dashboard built to manage esports ro
 * **Containerization:** Docker & Docker Compose
 * **CI/CD:** GitHub Actions (Automated pytest pipeline)
 
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed on your local machine:
+* [Git](https://git-scm.com/downloads)
+* [Docker](https://docs.docker.com/get-docker/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
 ## 🚀 Quick Start (Docker)
 
 The easiest way to run the complete stack is via Docker. Ensure you have Git and Docker installed on your machine.
