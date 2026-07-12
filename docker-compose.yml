@@ -32,10 +32,10 @@ services:
       - .env
 
   # Налаштування Streamlit фронтенду
+  # Налаштування Streamlit фронтенду
   frontend:
     build:
-      context: ./frontend # 👈 Вказуємо, що контекст збірки тепер у папці frontend
-      # Ключ dockerfile більше не потрібен, бо файл тепер має стандартну назву Dockerfile
+      context: ./frontend
     container_name: valorant_frontend
     restart: always
     ports:
@@ -43,7 +43,7 @@ services:
     depends_on:
       - web
     environment:
-      - BACKEND_URL=http://web:8000# Вказуємо внутрішню Docker-адресу бекенду
+      - BACKEND_URL=http://web:8000
 
 volumes:
   postgres_data:

@@ -53,7 +53,7 @@ with col1:
                 }
                 
                 try:
-                    response = requests.post(f"{API_URL}/players/", json=payload)
+                    response = requests.post(f"{API_URL}/players", json=payload)
                     if response.status_code == 200:
                         data = response.json()
                         st.success(f"✅ Гравця успішно додано!")

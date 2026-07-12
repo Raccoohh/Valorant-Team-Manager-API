@@ -55,17 +55,34 @@ async def get_player_matches(player_id: int, db: AsyncSession = Depends(get_db))
     # 1. Отримуємо гігантський масив (повні дані матчів) від стороннього API
     raw_matches = await riot_service.get_player_matchlist(game_name, tag_line)
     
-    # 2. Робимо коротку вижимку, щоб Swagger (і фронтенд у майбутньому) не зависав
+    # 2. Робимо коротку вижимку із захистом від "битих" даних Riot API
     short_matches = []
+    
+    # Захист: якщо raw_matches прийшов як None замість списку
+    if not raw_matches:
+        raw_matches = []
+
     for match in raw_matches:
-        meta = match.get("metadata", {})
+        # Захист 1: іноді API повертає порожні елементи в списку
+        if not match or not isinstance(match, dict):
+            continue
+            
+        # Захист 2: Використовуємо `or {}` замість `.get(..., {})`. 
+        # Якщо metadata == None, оператор `or` примусово зробить його {}
+        meta = match.get("metadata") or {}
+        
+        # Захист 3: Якщо у матчу немає ID (наприклад, скасована гра), пропускаємо його
+        match_id = meta.get("matchid")
+        if not match_id:
+            continue
+
         short_matches.append({
-            "match_id": meta.get("matchid"),
-            "map": meta.get("map"),
-            "mode": meta.get("mode"),
-            "server": meta.get("cluster"),
-            "rounds_played": meta.get("rounds_played"),
-            "start_time": meta.get("game_start_patched")
+            "match_id": match_id,
+            "map": meta.get("map", "Unknown"),
+            "mode": meta.get("mode", "Unknown"),
+            "server": meta.get("cluster", "Unknown"),
+            "rounds_played": meta.get("rounds_played", 0),
+            "start_time": meta.get("game_start_patched", "Unknown")
         })
     
     return {
@@ -75,7 +92,6 @@ async def get_player_matches(player_id: int, db: AsyncSession = Depends(get_db))
             "nickname": db_player.nickname,
             "riot_id": db_player.riot_id
         },
-        # Віддаємо тільки акуратний відфільтрований список
         "matches": short_matches      
     }
 
