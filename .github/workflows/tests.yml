@@ -26,7 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         # Встановлюємо залежності проєкту та бібліотеки для тестування
         pip install -r requirements.txt
-        pip install pytest httpx pytest-asyncio
+        pip install pytest httpx pytest-asyncio aiosqlite
 
     - name: Run pytest
       # Змінні оточення-заглушки, щоб тести не падали через відсутність .env
