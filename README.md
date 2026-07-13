@@ -1,113 +1,100 @@
-# Valorant Team Manager API 🎯
+# 🎯 no talent | Valorant Team Manager & AI Coach
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![AI](https://img.shields.io/badge/AI_Coach-Llama_3-purple.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 
-An asynchronous RESTful API and Interactive Dashboard built to manage esports rosters (like "no talent"), track player statistics, and provide instant AI-driven coaching feedback using live match data.
+A full-stack, containerized application designed to manage the **no talent** competitive Valorant roster. It tracks match histories via the Riot API, manages tournament entries and payments, and provides automated VOD reviews using AI (Groq Llama 3.1).
 
-## ✨ Features
+## ✨ Core Features
 
-* **🧠 AI Coach Analysis:** Generates personalized, professional esports coaching feedback for specific matches using the Groq API (Llama 3.1) based on raw gameplay statistics.
-* **📈 Streamlit Analytics Dashboard:** A clean, gamer-oriented web interface to easily register players, view match history, and request AI analysis without touching API endpoints manually.
-* **👥 Team & Player Management:** Register players using their Riot ID (Name#Tag), automatically fetching and storing their unique PUUID via the official Riot API.
-* **🔄 Advanced Match Tracking:** Fetch clean, lightweight match history and detailed individual performance metrics (K/D/A, Agents, Map, Win/Loss).
-* **🐳 Fully Dockerized:** Seamless one-click deployment for the database, backend, and frontend via Docker Compose.
+* **Esports Roster Management:** Register players with their Riot IDs, assign roles (Duelist, Initiator, etc.), and manage Discord integrations.
+* **Resilient Riot API Integration:** Fetches player PUUIDs and match statistics from the HenrikDev API. Built with fault tolerance to handle missing metadata (e.g., custom lobbies, deathmatches).
+* **AI Match Coach:** Deep integration with Groq LLM to analyze raw match metrics (KDA, agent, map) and generate actionable tactical feedback.
+* **Automated Migrations:** Alembic migrations run automatically on container startup to ensure database schemas are always strictly in sync.
+* **Interactive HQ Dashboard:** Built with Streamlit, offering a dual-column layout for immediate player registration and historical match analysis.
 
-## 🛠 Tech Stack
+## 🏗️ Architecture & Tech Stack
 
-* **Backend Framework:** FastAPI (Asynchronous)
-* **Frontend UI:** Streamlit, Pandas
-* **Database:** PostgreSQL (Asyncpg) + SQLAlchemy 2.0
-* **Migrations:** Alembic
-* **External APIs:** Riot Games Account API, HenrikDev Valorant API
-* **AI Integration:** Groq Python SDK (Llama-3.1-8b-instant)
-* **Containerization:** Docker & Docker Compose
-* **CI/CD:** GitHub Actions (Automated pytest pipeline)
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed on your local machine:
-* [Git](https://git-scm.com/downloads)
-* [Docker](https://docs.docker.com/get-docker/)
-* [Docker Compose](https://docs.docker.com/compose/install/)
-
----
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Backend** | FastAPI (Python 3.10+) | Asynchronous REST API with CORS enabled for public/commercial access. |
+| **Database** | PostgreSQL + asyncpg | Relational database handling teams, players, tournaments, and payments. |
+| **ORM & Migrations** | SQLAlchemy + Alembic | Asynchronous database interactions and version control. |
+| **Frontend** | Streamlit | Responsive UI directly communicating with the backend API. |
+| **AI / LLM** | Groq API | High-speed inference for the tactical AI coach feature. |
+| **DevOps** | Docker + Compose | Multi-container orchestration (`db`, `web`, `frontend`). |
 
 ## 🚀 Quick Start (Docker)
 
-The easiest way to run the complete stack is via Docker. Ensure you have Git and Docker installed on your machine.
+The recommended way to launch the application is via Docker. The setup is fully self-contained.
 
-**1. Clone the repository:**
-```bash
-git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
-cd Valorant-Team-Manager-API
-```
-
-**2. Configure Environment Variables:**
-Create a ```.env``` file in the root directory (you can safely copy ```.env.example```) and configure your secure credentials:
-```bash
-# Database Credentials
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your_secure_password
+### 1. Environment Setup
+Create a `.env` file in the root directory and add your secret keys:
+```env
+POSTGRES_USER=your_db_user
+POSTGRES_PASSWORD=your_db_password
 POSTGRES_DB=valorant_db
 
-# Backend Database URL
-DATABASE_URL=postgresql+asyncpg://postgres:your_secure_password@db:5432/valorant_db
-
-# External APIs
-RIOT_API_KEY=RGAPI-your-official-riot-key
-HENRIK_API_KEY=your-henrik-api-key
-GROQ_API_KEY=gsk_your-groq-api-key
+RIOT_API_KEY=your_riot_api_key_here
+HENRIK_API_KEY=your_henrikdev_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
-**3. Build and start the containers:**
-```bash
+**2. Launch the Cluster**
+Start the containers using Docker Compose:
+```Bash
 docker compose up --build -d
 ```
-Note: The FastAPI backend container will automatically run the Alembic database migrations on startup.
+Note: The ```web``` container is configured to run ```alembic upgrade head``` automatically before starting the Uvicorn server, ensuring your database is instantly ready.
 
-## 🌐 Accessing the Application
 
-Once the containers are successfully running, you can access the services locally:
-* **🎮 Streamlit Dashboard (Frontend):**  `http://localhost:8501`
-* **📖 Interactive API Docs (Swagger UI):**  `http://localhost:8000/docs`
-* **📄 Alternative API Docs (ReDoc):**  `http://localhost:8000/redoc`
+**3. Access the Services**
+* **no talent HQ Dashboard (Streamlit):**  `http://localhost:8501`
+* **API Swagger Documentation:**  `http://localhost:8000/docs`
 
-## 🧪 Testing
+## 💻 Local Development (Optional)
 
-This project uses `pytest` for testing. The testing pipeline is fully automated via **GitHub Actions** and runs on every push or pull request to the `main` branch.
-To run the test suite locally on your machine:
-
-**1. Install testing dependencies (if not already installed):**
-```bash
-pip install pytest httpx pytest-asyncio
-```
-
-2. Execute the tests:
+If you need to develop locally or leverage IDE IntelliSense, set up your Python environment.
 ```Bash
-pytest -v
+# 1. Create and activate a virtual environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1  # Windows
+# source venv/bin/activate   # macOS/Linux
+
+# 2. Install dependencies
+pip install -r requirements.txt
 ```
 
-## 🛑 Stopping the Application
+## 🧪 Testing Strategy
 
-To stop the running containers and free up resources, run:
+* **Absolute Database Isolation:** Tests bypass PostgreSQL entirely, utilizing an in-memory ```SQLite``` (```aiosqlite```) database via dependency overrides. Tables are generated and dropped natively within the fixture lifecycle.
+
+* **Zero-Network Mocking:** Third-party API calls (Riot API) are aggressively mocked using ```unittest.mock.patch``` to prevent rate-limiting and ensure deterministic, sub-second test execution.
+
+**Run the test suite inside the active backend container:**
 ```Bash
-docker compose down
+docker compose exec web pytest -v
 ```
 
-## 📖 API Documentation (Key Endpoints)
+## 📁 Project Structure
 
-The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to `/docs` to interact with all endpoints. Some of the core routes include:
-
-* **`POST /players/`** - Register a new player and automatically fetch their Riot PUUID.
-* **`GET /players/{player_id}/matches`** - Fetch a lightweight summary of the player's recent matches.
-* **`GET /players/{player_id}/matches/{match_id}/analyze`** - Generate automated AI coach feedback (Groq Llama 3) for a specific match.
-* **`POST /teams/`** - Register a new esports team and assign a captain.
-* **`POST /payments/`** - Process tournament entry fee payments for the team.
+├── app/
+│   ├── api/            # API Routers (players, teams, tournaments, matches, payments)
+│   ├── core/           # Database engine and session configuration
+│   ├── crud/           # Database CRUD operations
+│   ├── models/         # SQLAlchemy schemas
+│   ├── schemas/        # Pydantic validation models
+│   └── main.py         # FastAPI application entry point & CORS configuration
+├── frontend/
+│   └── app.py          # Streamlit UI dashboard
+├── alembic/            # Database migration scripts
+├── tests/              # Pytest async test suite and conftest.py
+├── docker-compose.yml  # Service orchestration (Postgres, API, Frontend)
+├── Dockerfile          # Python backend image recipe
+└── requirements.txt    # Project dependencies
 
 *Developed by [raccoohh](https://github.com/Raccoohh)*
 
