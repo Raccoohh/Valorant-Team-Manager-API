@@ -1,113 +1,100 @@
-# Valorant Team Manager API 🎯
+# 🎮 Valorant Team Manager & AI Coach API
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![AI](https://img.shields.io/badge/AI_Coach-Llama_3-purple.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 
-An asynchronous RESTful API and Interactive Dashboard built to manage esports rosters (like "no talent"), track player statistics, and provide instant AI-driven coaching feedback using live match data.
+A full-stack, containerized application designed to manage competitive Valorant rosters (like *no talent*), track match histories via the Riot API, and provide automated VOD reviews and tactical feedback using AI (Groq Llama 3.1).
 
 ## ✨ Features
 
-* **🧠 AI Coach Analysis:** Generates personalized, professional esports coaching feedback for specific matches using the Groq API (Llama 3.1) based on raw gameplay statistics.
-* **📈 Streamlit Analytics Dashboard:** A clean, gamer-oriented web interface to easily register players, view match history, and request AI analysis without touching API endpoints manually.
-* **👥 Team & Player Management:** Register players using their Riot ID (Name#Tag), automatically fetching and storing their unique PUUID via the official Riot API.
-* **🔄 Advanced Match Tracking:** Fetch clean, lightweight match history and detailed individual performance metrics (K/D/A, Agents, Map, Win/Loss).
-* **🐳 Fully Dockerized:** Seamless one-click deployment for the database, backend, and frontend via Docker Compose.
+* **Roster Management:** Register players, assign roles, and form competitive teams.
+* **Riot API Integration:** Automatically fetches player PUUIDs and recent match statistics (handles custom lobbies and deathmatches safely).
+* **AI Coach:** Analyzes post-match statistics using LLMs to provide actionable feedback and tactical advice.
+* **Robust Testing:** Asynchronous test suite using an isolated in-memory SQLite database and mocked external API calls.
+* **Interactive Dashboard:** Built with Streamlit for a seamless user experience.
 
-## 🛠 Tech Stack
+## 🏗️ Tech Stack
 
-* **Backend Framework:** FastAPI (Asynchronous)
-* **Frontend UI:** Streamlit, Pandas
-* **Database:** PostgreSQL (Asyncpg) + SQLAlchemy 2.0
+* **Backend:** FastAPI (Python 3.10+)
+* **Database:** PostgreSQL (asyncpg), SQLAlchemy ORM
 * **Migrations:** Alembic
-* **External APIs:** Riot Games Account API, HenrikDev Valorant API
-* **AI Integration:** Groq Python SDK (Llama-3.1-8b-instant)
-* **Containerization:** Docker & Docker Compose
-* **CI/CD:** GitHub Actions (Automated pytest pipeline)
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed on your local machine:
-* [Git](https://git-scm.com/downloads)
-* [Docker](https://docs.docker.com/get-docker/)
-* [Docker Compose](https://docs.docker.com/compose/install/)
+* **Frontend:** Streamlit
+* **External Services:** HenrikDev API (Unofficial Riot API), Groq API (LLM)
+* **DevOps:** Docker, Docker Compose
+* **Testing:** Pytest, pytest-asyncio, aiosqlite, unittest.mock
 
 ---
 
 ## 🚀 Quick Start (Docker)
 
-The easiest way to run the complete stack is via Docker. Ensure you have Git and Docker installed on your machine.
+The easiest way to run the application is using Docker. This ensures a consistent environment without polluting your local machine.
 
-**1. Clone the repository:**
-```bash
-git clone [https://github.com/Raccoohh/Valorant-Team-Manager-API.git](https://github.com/Raccoohh/Valorant-Team-Manager-API.git)
-cd Valorant-Team-Manager-API
+### 1. Environment Variables
+Create a `.env` file in the root directory and add your API keys:
+```env
+RIOT_API_KEY=your_henrikdev_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
-**2. Configure Environment Variables:**
-Create a ```.env``` file in the root directory (you can safely copy ```.env.example```) and configure your secure credentials:
-```bash
-# Database Credentials
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your_secure_password
-POSTGRES_DB=valorant_db
-
-# Backend Database URL
-DATABASE_URL=postgresql+asyncpg://postgres:your_secure_password@db:5432/valorant_db
-
-# External APIs
-RIOT_API_KEY=RGAPI-your-official-riot-key
-HENRIK_API_KEY=your-henrik-api-key
-GROQ_API_KEY=gsk_your-groq-api-key
-```
-
-**3. Build and start the containers:**
+**2. Build and Run**
+Start the containers using Docker Compose:
 ```bash
 docker compose up --build -d
 ```
-Note: The FastAPI backend container will automatically run the Alembic database migrations on startup.
+Docker will automatically provision the PostgreSQL database, run Alembic migrations, and start the backend and frontend servers.
 
-## 🌐 Accessing the Application
+**3. Access the Application**
+* **Interactive Dashboard (Frontend):**  `http://localhost:8501`
+* **API Swagger Documentation:**  `http://localhost:8000/docs`
 
-Once the containers are successfully running, you can access the services locally:
-* **🎮 Streamlit Dashboard (Frontend):**  `http://localhost:8501`
-* **📖 Interactive API Docs (Swagger UI):**  `http://localhost:8000/docs`
-* **📄 Alternative API Docs (ReDoc):**  `http://localhost:8000/redoc`
+💻 Local Development (Optional)
+If you wish to contribute to the code, use IDE features like IntelliSense, or run scripts locally, set up a virtual environment.
+
+**1. Setup Virtual Environment**
+```Bash
+python -m venv venv
+# On Windows:
+.\venv\Scripts\Activate.ps1
+# On macOS/Linux:
+source venv/bin/activate
+```
+
+**2. Install Dependencies**
+```Bash
+pip install -r requirements.txt
+pip install pytest pytest-asyncio aiosqlite httpx
+```
+(Note: The application still requires a running PostgreSQL instance. You can keep the db container running via Docker while developing the backend locally).
 
 ## 🧪 Testing
 
-This project uses `pytest` for testing. The testing pipeline is fully automated via **GitHub Actions** and runs on every push or pull request to the `main` branch.
-To run the test suite locally on your machine:
+The project features a robust, isolated asynchronous testing environment.
 
-**1. Install testing dependencies (if not already installed):**
-```bash
-pip install pytest httpx pytest-asyncio
-```
+* **Database Isolation:** Tests run against an in-memory ```SQLite``` database (```aiosqlite```), ensuring the production PostgreSQL database remains untouched.
+* **Network Isolation:** All third-party API calls (e.g., Riot API) are mocked using ```@patch``` to ensure fast, reliable, and offline testing without hitting rate limits.
 
-2. Execute the tests:
+To run the test suite inside the Docker container:
 ```Bash
-pytest -v
+docker compose exec web pytest -v
 ```
 
-## 🛑 Stopping the Application
-
-To stop the running containers and free up resources, run:
-```Bash
-docker compose down
-```
-
-## 📖 API Documentation (Key Endpoints)
-
-The REST API is fully documented using OpenAPI (Swagger). Once the application is running, navigate to `/docs` to interact with all endpoints. Some of the core routes include:
-
-* **`POST /players/`** - Register a new player and automatically fetch their Riot PUUID.
-* **`GET /players/{player_id}/matches`** - Fetch a lightweight summary of the player's recent matches.
-* **`GET /players/{player_id}/matches/{match_id}/analyze`** - Generate automated AI coach feedback (Groq Llama 3) for a specific match.
-* **`POST /teams/`** - Register a new esports team and assign a captain.
-* **`POST /payments/`** - Process tournament entry fee payments for the team.
+##  📁 Project Structure
+├── app/
+│   ├── api/            # FastAPI routers (players, teams, matches)
+│   ├── core/           # Database configuration and app settings
+│   ├── crud/           # Create, Read, Update, Delete operations
+│   ├── models/         # SQLAlchemy database models
+│   ├── schemas/        # Pydantic validation schemas
+│   └── services/       # External API clients (Riot Service, AI Service)
+├── frontend/           # Streamlit application UI
+├── alembic/            # Database migration scripts
+├── tests/              # Asynchronous unit and integration tests
+├── docker-compose.yml  # Container orchestration
+├── Dockerfile          # Backend image configuration
+└── requirements.txt    # Python dependencies
 
 *Developed by [raccoohh](https://github.com/Raccoohh)*
 
